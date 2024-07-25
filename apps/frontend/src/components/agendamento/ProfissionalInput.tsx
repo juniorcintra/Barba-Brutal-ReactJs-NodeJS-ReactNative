@@ -1,5 +1,5 @@
-import useProfissionais from "@/data/hooks/useProfissionais";
 import { Profissional } from "@barba/core";
+import { useProfissionais } from "@barba/ui";
 import Image from "next/image";
 
 export interface ProfissionalInputProps {
@@ -14,10 +14,7 @@ function Opcao(props: {
 }) {
   return (
     <div
-      className={`
-                flex flex-col items-center cursor-pointer select-none rounded-lg border w-[150px] h-[180px]
-                ${props.selecionado ? "border-green-400" : "border-zinc-700"} overflow-hidden
-            `}
+      className={`flex h-[180px] w-[150px] cursor-pointer select-none flex-col items-center rounded-lg border ${props.selecionado ? "border-green-400" : "border-zinc-700"} overflow-hidden`}
       onClick={() => props.onClick(props.profissional)}
     >
       <Image
@@ -27,10 +24,7 @@ function Opcao(props: {
         height={150}
       />
       <div
-        className={`
-                    py-2 w-full h-full text-center text-xs
-                    ${props.selecionado ? "text-black bg-green-400 font-semibold" : "text-zinc-400 font-light bg-zinc-900 "}
-                `}
+        className={`h-full w-full py-2 text-center text-xs ${props.selecionado ? "bg-green-400 font-semibold text-black" : "bg-zinc-900 font-light text-zinc-400"} `}
       >
         {props.profissional.nome.split(" ")[0]}
       </div>
@@ -46,7 +40,7 @@ export default function ProfissionalInput(props: ProfissionalInputProps) {
       <span className="text-sm uppercase text-zinc-400">
         Profissionais Disponíveis
       </span>
-      <div className="grid grid-cols-2 md:grid-cols-3 self-start gap-5">
+      <div className="grid grid-cols-2 gap-5 self-start md:grid-cols-3">
         {profissionais.map((profissional) => (
           <Opcao
             key={profissional.id}
