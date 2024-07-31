@@ -13,11 +13,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Usuario {
+  id           Int           @id @default(autoincrement())
+  nome         String
+  email        String        @unique
+  senha        String
+  telefone     String
+  barbeiro     Boolean
+  agendamentos Agendamento[]
+
+  @@map("usuario")
+}
+
 model Profissional {
   id                   Int           @id @default(autoincrement())
   nome                 String        @unique
   descricao            String
-  imagemURL            String
+  imagemUrl            String
   avaliacao            Float
   quantidadeAvaliacoes Int
   agendamentos         Agendamento[]
@@ -39,11 +51,12 @@ model Servico {
 
 model Agendamento {
   id             Int          @id @default(autoincrement())
-  emailCliente   String
   data           DateTime     @db.Timestamptz(3)
   profissional   Profissional @relation(fields: [profissionalId], references: [id])
   profissionalId Int
   servicos       Servico[]
+  usuario        Usuario      @relation(fields: [usuarioId], references: [id])
+  usuarioId      Int
 
   @@map("agendamento")
 }

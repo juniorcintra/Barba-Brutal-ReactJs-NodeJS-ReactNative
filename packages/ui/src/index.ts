@@ -1,4 +1,4 @@
-import useServicos from "./hooks/useServicos";
-import useProfissionais from "./hooks/useProfissionais";
+import useServicos from "./hooks/useServicos"
+import useProfissionais from "./hooks/useProfissionais"
 
-export { useServicos, useProfissionais };
+export { useServicos, useProfissionais }

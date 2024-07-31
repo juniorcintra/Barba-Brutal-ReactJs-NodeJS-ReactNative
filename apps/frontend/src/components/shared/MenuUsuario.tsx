@@ -7,17 +7,18 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { useRouter } from 'next/navigation'
 import { Usuario } from '@barba/core'
 import Image from 'next/image'
 import useUsuario from '@/data/hooks/useUsuario'
+import { useRouter } from 'next/navigation'
 
 export interface MenuUsuarioProps {
     usuario: Usuario
 }
 
 export default function MenuUsuario(props: MenuUsuarioProps) {
-    const { sair } = useUsuario()
+    const { usuario, sair } = useUsuario()
+    const router = useRouter()
 
     return props.usuario ? (
         <DropdownMenu>
@@ -35,6 +36,11 @@ export default function MenuUsuario(props: MenuUsuarioProps) {
             <DropdownMenuContent>
                 <DropdownMenuLabel>Menu Usuário</DropdownMenuLabel>
                 <DropdownMenuSeparator />
+                {usuario?.barbeiro && (
+                    <DropdownMenuItem onClick={() => router.push('/agenda')}>
+                        Minha Agenda
+                    </DropdownMenuItem>
+                )}
                 <DropdownMenuItem onClick={sair}>Logout</DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
